@@ -2,6 +2,9 @@
 # Created by https://www.gitignore.io/api/c,r,c++,latex,python
 # Edit at https://www.gitignore.io/?templates=c,r,c++,latex,python
 
+*.bin
+*.txt
+
 ### C ###
 # Prerequisites
 *.d
