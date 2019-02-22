@@ -32,4 +32,11 @@ int main(){
 	for(int i = 0; i < N; i++) {
 		foo(N, mat, s, v);
 	}
+	for(int i = 0; i < N; i++) {
+		free(mat[i]);
+		free(s[i]);
+	}
+	free(mat);
+	free(s);
+	free(v);
 }

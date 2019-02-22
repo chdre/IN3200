@@ -32,4 +32,11 @@ int main(){
 			}
 		}
 	}
+	for(int j = 0; j < N; j++) {
+		free(A[j]);
+	}
+	free(A);
+	free(B);
+	free(y);
+
 }
