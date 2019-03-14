@@ -1,6 +1,10 @@
 #include <omp.h>
 #include <stdlib.h>
 #include <stdio.h>
+/*
+   Parallelising dense_mat_vec
+ */
+
 
 
 void dense_mat_vec(int m, int n, double *x, double *A, double *y){
