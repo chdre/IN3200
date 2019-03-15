@@ -75,5 +75,4 @@ int main(){
 	}
 	free(u);
 	free(v);
-
 }
