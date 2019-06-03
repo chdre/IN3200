@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <omp.h>
-//
-// void improve_this() {
+
+// int main(int argc, char const *argv[]) {
 //  int i, N = 100000;
 //  double u[N], v[N];
 //
@@ -30,7 +30,7 @@
 
 int main(int argc, char const *argv[]) {
 	int i, N = 100000;
-	double *u, *v, tmp;
+	double *u, *v, *tmp;
 
 	u = malloc(N*sizeof(u));
 	v = malloc(N*sizeof(v));
@@ -45,18 +45,21 @@ int main(int argc, char const *argv[]) {
 		int time_step;
 
 		for(time_step = 0; time_step < 1000; time_step++) {
-		#pragma omp for nowait
+	  #pragma omp for
 			for(i = 1; i < N-1; i++)
 				v[i] = u[i-1] - 2*u[i] + u[i+1];
 
-		#pragma omp for
-			for(i = 0; i < N; i++) {
-				tmp = v[i];
-				v[i] = u[i];
-				u[i] = tmp;
-			}
+			// end points
+			v[0] = u[0];
+			v[N-1] = u[N-1];
+
+			/* if a process is finished with for loop and does a pointer swap, other
+			   procs may be working with the wrong u. */
+			#pragma omp single
+			tmp = *v;
+			*v = *u;
+			*u = tmp;
 		}
 	}
-
 	return 0;
 }
